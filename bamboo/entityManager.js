@@ -13,7 +13,14 @@ var EntityManager = function (pGame) {
 
     self.addImage = function(pImage, pX, pY, pWidth, pHeight) {
         var entity = new Bamboo.entity(pX, pY, pWidth, pHeight);
-        entity.texture = self.game.assets.get(pImage);
+        var image = self.game.assets.get(pImage);
+        entity.texture = {
+            image: image,
+            sourceX: 0,
+            sourceY: 0,
+            sourceWidth: image.width,
+            sourceHeight: image.height
+        };
         self.pool.push(entity);
         return entity;
     };

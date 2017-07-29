@@ -33,8 +33,4 @@ var TimeManager = function (pGame) {
         return pDegrees * self.delta / 1000 * self.motion;
     };
 
-    self.getTurrent = function() {
-        return self.current;
-    };
-
 };

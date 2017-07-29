@@ -49,7 +49,11 @@ var Renderer = function (pCanvas) {
                         self.context.fill();
                     } else {
                         self.context.drawImage(
-                            e.texture,
+                            e.texture.image,
+                            e.texture.sourceX,
+                            e.texture.sourceY,
+                            e.texture.sourceWidth,
+                            e.texture.sourceHeight,
                             e.width  * -e.anchorX,
                             e.height * -e.anchorY,
                             e.width,

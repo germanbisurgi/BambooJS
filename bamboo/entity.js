@@ -2,7 +2,6 @@ var Entity = function (pX, pY, pWidth, pHeight, pGame) {
     "use strict";
     var self = this;
 
-    self.texture = null;
     self.x = pX;
     self.y = pY;
     self.width = pWidth;
