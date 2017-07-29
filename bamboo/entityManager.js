@@ -13,14 +13,7 @@ var EntityManager = function (pGame) {
 
     self.addImage = function(pImage, pX, pY, pWidth, pHeight) {
         var entity = new Bamboo.entity(pX, pY, pWidth, pHeight);
-        var image = self.game.assets.get(pImage);
-        entity.texture = {
-            image: image,
-            sourceX: 0,
-            sourceY: 0,
-            sourceWidth: image.width,
-            sourceHeight: image.height
-        };
+        entity.texture = self.game.assets.get(pImage);
         self.pool.push(entity);
         return entity;
     };
@@ -30,7 +23,6 @@ var EntityManager = function (pGame) {
         var texture = self.game.assets.get(pImage);
         var sprite = new Bamboo.sprite(texture, self.game);
         var extended = self.extend(entity, sprite);
-        console.log(extended);
         self.pool.push(entity);
         return entity;
     };
