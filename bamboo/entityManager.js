@@ -24,23 +24,27 @@ var EntityManager = function (pGame) {
         self.pool.push(entity);
         return entity;
     };
+
+    self.addSprite = function(pImage, pX, pY, pWidth, pHeight, pSourceWidth, pSourceHeight) {
+        var entity = new Bamboo.entity(pX, pY, pWidth, pHeight);
+        var image = self.game.assets.get(pImage);
+        var sprite = new Bamboo.sprite(image, pSourceWidth, pSourceHeight, self.game);
+        var extended = self.extend(entity, sprite);
+        
+        self.pool.push(entity);
+        return entity;
+    };
     
     self.list = function() {
         return self.pool();
     };
 
-    self.extend = function(output) {
-    output = output || {};
-
-    for (var i = 1; i < arguments.length; i++) {
-        if (!arguments[i])  continue;
-
-        for (var key in arguments[i]) {
-            if (arguments[i].hasOwnProperty(key))
-            output[key] = arguments[i][key];
+    self.extend = function(objA, objB) {
+        var members = objB;
+        for (var member in members) {
+            objA[member] = members[member];
         }
-    }
-      return output;
+        return objA
     };
 
 };
