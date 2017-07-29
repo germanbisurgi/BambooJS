@@ -2,9 +2,6 @@ var Entity = function (pX, pY, pWidth, pHeight, pGame) {
     "use strict";
     var self = this;
 
-    // -------------------------------------------------------- core properties.
-
-    self.state = null;
     self.texture = null;
     self.x = pX;
     self.y = pY;

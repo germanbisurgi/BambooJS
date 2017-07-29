@@ -1,4 +1,4 @@
-var Loader = function () {
+var Assets = function () {
     "use strict";
     var self = this;
     self.loading = false;
@@ -34,7 +34,7 @@ var Loader = function () {
         });
     };
 
-    self.getAsset = function(pAssetName) {
+    self.get = function(pAssetName) {
         var output = false;
         self.assets.forEach(function (asset) {
             if (asset.name === pAssetName) {
@@ -50,7 +50,7 @@ var Loader = function () {
             self.loading = true;
             self.downloadQueue.forEach(function (asset) {
 
-                if (!self.getAsset(asset.name)) {
+                if (!self.get(asset.name)) {
 
                     // ------------------------------------- image and sprite sheets
 

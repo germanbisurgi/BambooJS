@@ -7,7 +7,7 @@ var Game = function (pWidth, pHeight, pFPS, pCanvas) {
     // -------------------------------------------------------------------- init
 
     self.loop = new Bamboo.loop(pFPS);
-    self.loader = new Bamboo.loader();
+    self.assets = new Bamboo.assets();
     self.inputs = new Bamboo.inputs(pCanvas);
     self.screen = new Bamboo.screen(pWidth, pHeight, pCanvas);
     self.renderer = new Bamboo.renderer(pCanvas);
@@ -29,14 +29,14 @@ var Game = function (pWidth, pHeight, pFPS, pCanvas) {
                 if (!self.currentState.preloaded) {
                     self.currentState.preloaded = true;
                     self.currentState.preload();
-                    self.loader.loadAll();
+                    self.assets.loadAll();
                 }
 
                 // ------------------------------------------------------ create
 
                 if (!self.currentState.created &&
                     self.currentState.preloaded &&
-                    !self.loader.loading) {
+                    !self.assets.loading) {
                     self.currentState.created = true;
                     self.currentState.create();
                 }
@@ -76,7 +76,7 @@ var Game = function (pWidth, pHeight, pFPS, pCanvas) {
     self.addState = function(pState) {
         pState.game = self;
         pState.loop = self.loop;
-        pState.loader = self.loader;
+        pState.assets = self.assets;
         pState.inputs = self.inputs;
         pState.screen = self.screen;
         pState.renderer = self.renderer;

@@ -3,8 +3,11 @@ var gameState = new Bamboo.state('gameState');
 gameState.create = function () {
     this.myCamera = this.cameras.current;
     this.myRefferenceEntity = this.entities.add(0, 0, 25, 25);
-    this.myEntity = this.entities.add(50, 50, 50, 50);
-    this.myEntity.texture = this.loader.getAsset('stone');
+    //this.myEntity = this.entities.add(50, 50, 50, 50);
+    //this.myEntity.texture = this.loader.getAsset('stone');
+    this.myEntity = this.entities.addImage('stone', 50, 50, 50, 50);
+    //console.log(this.myEntity);
+    
     this.cameras.current.lerp = 5;
 };
 

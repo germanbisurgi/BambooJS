@@ -1,7 +1,7 @@
 var Bamboo = {
     game: Game,
     loop: Loop,
-    loader: Loader,
+    assets: Assets,
     screen: Screen,
     inputs: Inputs,
     renderer: Renderer,
