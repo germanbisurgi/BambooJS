@@ -1,15 +1,9 @@
-var Sprite = function (pImage, pSourceWidth, pSourceHeight, pGame) {
+var Sprite = function (pTexture, pGame) {
     "use strict";
     var self = this;
 
     self.game = pGame;
-    self.texture = {
-        image: pImage,
-        sourceX: 0,
-        sourceY: 0,
-        sourceWidth: pSourceWidth,
-        sourceHeight: pSourceHeight
-    };
+    self.texture = pTexture;
     self.delay = 0;
     self.counter = 0;
     self.animations = [];
@@ -38,7 +32,7 @@ var Sprite = function (pImage, pSourceWidth, pSourceHeight, pGame) {
     self.play = function (animationName) {
         var animation = self.getAnimation(animationName);
         if (animation) {
-            var columns = self.texture.image.width / self.texture.sourceWidth;
+            var columns = self.texture.image.width / self.texture.width;
             var delta = self.game.currentState.time.delta;
             self.delay += delta * self.game.currentState.time.motion;
 
@@ -46,8 +40,8 @@ var Sprite = function (pImage, pSourceWidth, pSourceHeight, pGame) {
                 self.counter = (self.counter + 1) % animation.sequence.length;
                 self.delay = 0;
             }
-            self.texture.sourceY = Math.floor((animation.sequence[self.counter] + 1) / columns) * self.texture.sourceHeight;
-            self.texture.sourceX = self.texture.sourceWidth * animation.sequence[self.counter]  - self.texture.image.width * self.texture.sourceY / self.texture.sourceHeight;
+            self.texture.y = Math.floor((animation.sequence[self.counter] + 1) / columns) * self.texture.height;
+            self.texture.x = self.texture.width * animation.sequence[self.counter]  - self.texture.image.width * self.texture.y / self.texture.height;
         }
     };
 

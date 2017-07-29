@@ -10,6 +10,7 @@ var Bamboo = {
     timeManager: TimeManager,
     cameraManager: CameraManager,
     entity: Entity,
+    texture: Texture,
     camera: Camera,
     sprite: Sprite
 };

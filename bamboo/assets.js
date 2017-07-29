@@ -26,11 +26,13 @@ var Assets = function () {
         });
     };
 
-    self.loadImage = function(pImageName, pPath) {
+    self.loadTexture = function(pImageName, pPath, pWidth, pHeight) {
         self.downloadQueue.push({
             type: 'image',
             name: pImageName,
-            path: pPath
+            path: pPath,
+            width: pWidth,
+            height: pHeight
         });
     };
 
@@ -52,7 +54,7 @@ var Assets = function () {
 
                 if (!self.get(asset.name)) {
 
-                    // ------------------------------------- image and sprite sheets
+                    // --------------------------------- image and sprite sheets
 
                     if (asset.type === 'image') {
 
@@ -61,6 +63,17 @@ var Assets = function () {
                         img.onload = function() {
                             self.lastLoaded = asset.name;
                             self.successCount++;
+
+                            var texture = new Bamboo.texture(
+                                asset.name,
+                                img,
+                                0,
+                                0,
+                                asset.width ? asset.width : img.width,
+                                asset.height ? asset.height : img.height
+                            );
+                            self.assets.push(texture);
+
                             if (self.loadComplete ()) {
                                 self.loading = false;
                                 self.reset();
@@ -76,9 +89,6 @@ var Assets = function () {
                         };
 
                         img.src = asset.path;
-                        var image = img;
-                        image.name = asset.name;
-                        self.assets.push(image);
 
                     }
 

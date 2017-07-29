@@ -50,10 +50,10 @@ var Renderer = function (pCanvas) {
                     } else {
                         self.context.drawImage(
                             e.texture.image,
-                            e.texture.sourceX,
-                            e.texture.sourceY,
-                            e.texture.sourceWidth,
-                            e.texture.sourceHeight,
+                            e.texture.x,
+                            e.texture.y,
+                            e.texture.width,
+                            e.texture.height,
                             e.width  * -e.anchorX,
                             e.height * -e.anchorY,
                             e.width,

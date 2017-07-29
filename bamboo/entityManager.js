@@ -27,10 +27,10 @@ var EntityManager = function (pGame) {
 
     self.addSprite = function(pImage, pX, pY, pWidth, pHeight, pSourceWidth, pSourceHeight) {
         var entity = new Bamboo.entity(pX, pY, pWidth, pHeight);
-        var image = self.game.assets.get(pImage);
-        var sprite = new Bamboo.sprite(image, pSourceWidth, pSourceHeight, self.game);
+        var texture = self.game.assets.get(pImage);
+        var sprite = new Bamboo.sprite(texture, self.game);
         var extended = self.extend(entity, sprite);
-        
+        console.log(extended);
         self.pool.push(entity);
         return entity;
     };

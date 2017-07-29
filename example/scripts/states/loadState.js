@@ -1,16 +1,16 @@
 var loadState = new Bamboo.state('loadState');
 
 loadState.preload = function () {
-    this.assets.loadImage('clouds', 'example/assets/images/clouds.jpg');
-    this.assets.loadImage('grass', 'example/assets/images/grass.jpg');
-    this.assets.loadImage('mine', 'example/assets/images/mine.png');
-    this.assets.loadImage('pattern', 'example/assets/images/pattern.png');
-    this.assets.loadImage('rocket', 'example/assets/images/rocket.png');
-    this.assets.loadImage('snow', 'example/assets/images/snow.png');
-    this.assets.loadImage('stone', 'example/assets/images/stone.png');
-    this.assets.loadImage('mountains', 'example/assets/images/mountains.png');
-    this.assets.loadImage('player', 'example/assets/images/player.png', 32, 32);
-    this.assets.loadImage('tanks', 'example/assets/images/tanks.png', 32, 32);
+    this.assets.loadTexture('clouds', 'example/assets/images/clouds.jpg');
+    this.assets.loadTexture('grass', 'example/assets/images/grass.jpg');
+    this.assets.loadTexture('mine', 'example/assets/images/mine.png');
+    this.assets.loadTexture('pattern', 'example/assets/images/pattern.png');
+    this.assets.loadTexture('rocket', 'example/assets/images/rocket.png');
+    this.assets.loadTexture('snow', 'example/assets/images/snow.png');
+    this.assets.loadTexture('stone', 'example/assets/images/stone.png');
+    this.assets.loadTexture('mountains', 'example/assets/images/mountains.png');
+    this.assets.loadTexture('player', 'example/assets/images/player.png', 32, 32);
+    this.assets.loadTexture('tanks', 'example/assets/images/tanks.png', 32, 32);
     this.assets.loadAudio('tic', 'example/assets/audio/tic.mp3');
     this.assets.loadAudio('laser', 'example/assets/audio/laser.mp3');
     this.assets.loadAudio('shot', 'example/assets/audio/shot.mp3');
