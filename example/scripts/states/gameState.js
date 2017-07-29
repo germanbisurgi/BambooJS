@@ -38,4 +38,7 @@ gameState.update = function () {
     this.myCamera.follow(this.myEntity);
 };
 
-gameState.shutdown = function () {};
+gameState.postRender = function () {
+    this.renderer.context.fillText('currentState:    ' + this.name, 200, 15);
+    this.renderer.context.fillText('state time:      ' +  Math.floor(this.time.current / 1000), 200, 30);
+};

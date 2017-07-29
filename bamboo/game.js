@@ -58,11 +58,9 @@ var Game = function (pWidth, pHeight, pFPS, pCanvas) {
                     );
 
                     // --------------------------------------------- post render
-     
-                    self.renderer.context.fillText('currentState:    ' + self.currentState.name, 200, 15);
-                    self.renderer.context.fillText('load progress: ' + self.loader.loadProgress().percent + '%', 200, 30);
-                    self.renderer.context.fillText('last loaded:     ' + self.loader.loadProgress().lastLoaded, 200, 45);
-                    self.renderer.context.fillText('state time:      ' +  Math.floor(self.currentState.time.current / 1000), 200, 60);
+                    
+                    self.currentState.postRender();
+                    
                 }
             }
         });

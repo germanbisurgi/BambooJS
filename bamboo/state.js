@@ -29,6 +29,8 @@ var State = function (pName) {
     self.create = function () {};
     
     self.update = function () {};
+
+    self.postRender = function () {};
     
     self.shutdown = function () {};
 
