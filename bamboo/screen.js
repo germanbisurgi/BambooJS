@@ -2,12 +2,12 @@ var Screen = function () {
     'use strict';
     var self = this;
 
-    self.width = window.innerWidth;
-    self.height = window.innerHeight;
+    self.width = 400;//window.innerWidth;
+    self.height = 200;//window.innerHeight;
     self.grid = 12;
 
     self.init = function () {
-        self.resize(window.innerWidth, window.innerHeight - 50);
+        self.resize(400, 200);
         /*window.addEventListener('resize', function () {
             self.resize(window.innerWidth, window.innerHeight);
         });*/
