@@ -1,0 +1,10 @@
+.loading {
+    background: #000;
+    color: #fff;
+    display: none;
+    position: absolute;
+}
+
+.show {
+    display: block;
+}

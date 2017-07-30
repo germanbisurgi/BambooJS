@@ -24,7 +24,11 @@ var State = function (pName) {
 
     // ------------------------------------------------------------ core methods
 
+    self.beforePreload = function () {};
+
     self.preload = function () {};
+
+    self.afterPreload = function () {};
 
     self.create = function () {};
     

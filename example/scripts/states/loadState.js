@@ -1,5 +1,10 @@
 var loadState = new Bamboo.state('loadState');
 
+loadState.beforePreload = function () {
+    var loadScreen = document.querySelector('.loading');
+    loadScreen.classList.add('show');
+};
+
 loadState.preload = function () {
     this.assets.loadTexture('grass', 'example/assets/images/grass.jpg');
     this.assets.loadTexture('landscape1', 'example/assets/images/landscape1.png');
@@ -18,6 +23,11 @@ loadState.preload = function () {
     this.assets.loadAudio('laser', 'example/assets/audio/laser.mp3');
     this.assets.loadAudio('shot', 'example/assets/audio/shot.mp3');
     this.assets.loadAudio('motor', 'example/assets/audio/motor.mp3');
+};
+
+loadState.afterPreload = function () {
+    var loadScreen = document.querySelector('.loading');
+    loadScreen.classList.remove('show');
 };
 
 loadState.create = function () {
