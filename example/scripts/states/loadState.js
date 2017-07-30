@@ -3,9 +3,7 @@ var loadState = new Bamboo.state('loadState');
 loadState.beforePreload = function () {
     console.log('before preload')
     var loadScreen = document.querySelector('.loading');
-    var loadingProgress = document.querySelector('.loading-progress');
     loadScreen.classList.add('show');
-    loadingProgress.innerText = this.assets.loadProgress().percent + '%' + this.assets.loadProgress().lastLoaded
 };
 
 loadState.preload = function () {
@@ -28,11 +26,18 @@ loadState.preload = function () {
     this.assets.loadAudio('motor', 'example/assets/audio/motor.mp3');
 };
 
-loadState.afterPreload = function () {
+loadState.loading = function () {
+    console.log('after preload')
+    var loadingProgress = document.querySelector('.loading-progress');
+    loadingProgress.innerText = this.assets.loadProgress().percent + '%' + this.assets.loadProgress().lastLoaded;
+};
+
+loadState.beforeCreate = function () {
     console.log('after preload')
     var loadScreen = document.querySelector('.loading');
     loadScreen.classList.remove('show');
 };
+
 
 loadState.create = function () {
     this.game.switchState('gameState');

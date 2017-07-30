@@ -28,7 +28,9 @@ var State = function (pName) {
 
     self.preload = function () {};
 
-    self.afterPreload = function () {};
+    self.loading = function () {};
+
+    self.beforeCreate = function () {};
 
     self.create = function () {};
     
