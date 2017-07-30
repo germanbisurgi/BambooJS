@@ -3,6 +3,12 @@ var loadState = new Bamboo.state('loadState');
 loadState.preload = function () {
     this.assets.loadTexture('clouds', 'example/assets/images/clouds.jpg');
     this.assets.loadTexture('grass', 'example/assets/images/grass.jpg');
+    this.assets.loadTexture('landscape1', 'example/assets/images/landscape1.png');
+    this.assets.loadTexture('landscape2', 'example/assets/images/landscape2.png');
+    this.assets.loadTexture('landscape3', 'example/assets/images/landscape3.png');
+    this.assets.loadTexture('landscape4', 'example/assets/images/landscape4.png');
+    this.assets.loadTexture('landscape5', 'example/assets/images/landscape5.png');
+    this.assets.loadTexture('landscape6', 'example/assets/images/landscape6.png');
     this.assets.loadTexture('mine', 'example/assets/images/mine.png');
     this.assets.loadTexture('pattern', 'example/assets/images/pattern.png');
     this.assets.loadTexture('rocket', 'example/assets/images/rocket.png');
