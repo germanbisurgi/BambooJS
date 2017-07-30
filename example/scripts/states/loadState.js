@@ -1,6 +1,7 @@
 var loadState = new Bamboo.state('loadState');
 
 loadState.beforePreload = function () {
+    console.log('before preload')
     var loadScreen = document.querySelector('.loading');
     var loadingProgress = document.querySelector('.loading-progress');
     loadScreen.classList.add('show');
@@ -28,6 +29,7 @@ loadState.preload = function () {
 };
 
 loadState.afterPreload = function () {
+    console.log('after preload')
     var loadScreen = document.querySelector('.loading');
     loadScreen.classList.remove('show');
 };

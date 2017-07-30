@@ -38,9 +38,7 @@ var Game = function (pWidth, pHeight, pFPS, pCanvas) {
                     self.currentState.preload();
                     self.assets.loadAll();
 
-                    // ------------------------------------------- after preload
-
-                    self.currentState.afterPreload();
+                    
                 }
 
                 // ------------------------------------------------------ create
@@ -48,6 +46,14 @@ var Game = function (pWidth, pHeight, pFPS, pCanvas) {
                 if (!self.currentState.created &&
                     self.currentState.preloaded &&
                     !self.assets.loading) {
+
+
+                    // ------------------------------------------- after preload
+
+                    self.currentState.afterPreload();
+
+                    // -------------------------------------------------- create
+
                     self.currentState.created = true;
                     self.currentState.create();
                 }
