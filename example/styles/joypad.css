@@ -12,24 +12,26 @@ body {
     width: 100vw;
 }
 
-.ui-previous-state {
-    border: 1px solid grey;
-    color: grey;
+.btn {
+    border: 1px solid coral;
+    color: coral;
     cursor: pointer;
     display: inline-block;
-    padding: 15px;
-   position: absolute;
+    padding: 5px;
+    position: absolute;
+    text-align: center;
+}
+
+.ui-previous-state {
+    position: absolute;
         bottom: 0;
         left: 0;
+    width: 50vw;
 }
 
 .ui-next-state {
-    border: 1px solid grey;
-    color: grey;
-    cursor: pointer;
-    display: inline-block;
-    padding: 15px;
     position: absolute;
         bottom: 0;
         right: 0;
+    width: 50vw;
 }
