@@ -1,38 +1,38 @@
 var gameState = new Bamboo.state('gameState');
 
 gameState.create = function () {
+
+    var screen = this.screen;
+    var entities = this.entities;
+
     this.myCamera = this.cameras.current;
-    this.cameras.current.lerp = 10;
+    this.cameras.current.lerp = 1;
 
-    this.myTileSprite6 = this.entities.addTileSprite('landscape6', 0, 0, this.screen.width, this.screen.height);
-    this.myTileSprite5 = this.entities.addTileSprite('landscape5', 0, 0, this.screen.width, this.screen.height);
-    this.myTileSprite4 = this.entities.addTileSprite('landscape4', 0, 0, this.screen.width, this.screen.height);
-    this.myTileSprite3 = this.entities.addTileSprite('landscape3', 0, 0, this.screen.width, this.screen.height);
-    this.myTileSprite2 = this.entities.addTileSprite('landscape2', 0, 0, this.screen.width, this.screen.height);
-    this.myTileSprite1 = this.entities.addTileSprite('landscape1', 0, 0, this.screen.width, this.screen.height);
+    this.myTileSprite6 = entities.addTileSprite('landscape6', 0, 0, screen.width, screen.height);
+    this.myTileSprite5 = entities.addTileSprite('landscape5', 0, 0, screen.width, screen.height);
+    this.myTileSprite4 = entities.addTileSprite('landscape4', 0, 0, screen.width, screen.height);
+    this.myTileSprite3 = entities.addTileSprite('landscape3', 0, 0, screen.width, screen.height);
+    this.myTileSprite2 = entities.addTileSprite('landscape2', 0, 0, screen.width, screen.height);
+    this.myTileSprite1 = entities.addTileSprite('landscape1', 0, 0, screen.width, screen.height);
         
-    this.myRefferenceEntity = this.entities.add(0, 0, 25, 25);
-    
-    this.myImage = this.entities.addImage('stone', 50, 50, 50, 50);
-
-    this.mySprite = this.entities.addSprite('player', 50, 50, 50, 50);
+    this.mySprite = entities.addSprite('player', 50, 50, screen.col(1), screen.col(1));
     this.mySprite.addAnimation('up', [37, 38, 37, 36], 100);
     this.mySprite.addAnimation('right', [25, 26, 25, 24], 100);
     this.mySprite.addAnimation('down', [1, 2, 1, 0], 100);
     this.mySprite.addAnimation('left', [13, 14, 13, 12], 100);
     
-    
 };
 
 gameState.update = function () {
 
+    var keyboard = this.inputs.keyboard;
     
     // cursor controls
-    if (this.inputs.keyboard.arrowUp) {
+    if (keyboard.arrowUp) {
         this.mySprite.y -= this.time.toPPS(180);
         this.mySprite.play('up');
     }
-    if (this.inputs.keyboard.arrowRight) {
+    if (keyboard.arrowRight) {
         this.mySprite.x += this.time.toPPS(180);
         this.mySprite.play('right');
         this.myTileSprite6.scroll('left', 5);
@@ -42,11 +42,11 @@ gameState.update = function () {
         this.myTileSprite2.scroll('left', 100);
         this.myTileSprite1.scroll('left', 200);
     }
-    if (this.inputs.keyboard.arrowDown) {
+    if (keyboard.arrowDown) {
         this.mySprite.y += this.time.toPPS(180);
         this.mySprite.play('down');
     }
-    if (this.inputs.keyboard.arrowLeft) {
+    if (keyboard.arrowLeft) {
         this.mySprite.x -= this.time.toPPS(180);
         this.mySprite.play('left');
         this.myTileSprite6.scroll('right', 5);
@@ -58,18 +58,18 @@ gameState.update = function () {
     }
 
     // camera controls
-    if (this.inputs.keyboard.w) {
+    if (keyboard.w) {
         this.myCamera.lerp = 1;
         this.myCamera.zoom += this.time.toPPS(1);
         this.myCamera.lerp = originalLerp;
     }
-    if (this.inputs.keyboard.d) {
+    if (keyboard.d) {
         this.myCamera.angle += this.time.toPPS(100);
     }
-    if (this.inputs.keyboard.s) {
+    if (keyboard.s) {
         this.myCamera.zoom -= this.time.toPPS(1);
     }
-    if (this.inputs.keyboard.a) {
+    if (keyboard.a) {
         this.myCamera.angle -= this.time.toPPS(100);
     }
 

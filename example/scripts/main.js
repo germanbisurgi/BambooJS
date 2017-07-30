@@ -12,10 +12,10 @@ game.addState(loadState);
 
 game.start('loadState');
 
-// ---------------------------------------------------------------------- joypad
+// -------------------------------------------------------------------------- ui
 
-var previousState = document.querySelector('.joypad-previous-state');
-var nextState = document.querySelector('.joypad-next-state');
+var previousState = document.querySelector('.ui-previous-state');
+var nextState = document.querySelector('.ui-next-state');
 
 previousState.onclick = function (e) {
     e.preventDefault();
