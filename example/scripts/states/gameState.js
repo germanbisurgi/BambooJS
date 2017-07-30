@@ -2,8 +2,7 @@ var gameState = new Bamboo.state('gameState');
 
 gameState.create = function () {
     this.myCamera = this.cameras.current;
-    this.cameras.current.lerp = 55;
-    this.cameras.current.offsetY = -50;
+    this.cameras.current.lerp = 10;
 
     this.myTileSprite6 = this.entities.addTileSprite('landscape6', 0, 0, this.screen.width, this.screen.height);
     this.myTileSprite5 = this.entities.addTileSprite('landscape5', 0, 0, this.screen.width, this.screen.height);
@@ -27,11 +26,7 @@ gameState.create = function () {
 
 gameState.update = function () {
 
-    this.myTileSprite1.x      = this.myTileSprite2.x      = this.myTileSprite3.x      = this.myTileSprite4.x      = this.myTileSprite5.x      = this.myTileSprite6.x      = this.myCamera.x      - this.myCamera.lerp;
-    this.myTileSprite1.y      = this.myTileSprite2.y      = this.myTileSprite3.y      = this.myTileSprite4.y      = this.myTileSprite5.y      = this.myTileSprite6.y      = this.myCamera.y      - this.myCamera.lerp;
-    this.myTileSprite1.width  = this.myTileSprite2.width  = this.myTileSprite3.width  = this.myTileSprite4.width  = this.myTileSprite5.width  = this.myTileSprite6.width  = this.myCamera.width  + this.myCamera.lerp * 2;
-    this.myTileSprite1.height = this.myTileSprite2.height = this.myTileSprite3.height = this.myTileSprite4.height = this.myTileSprite5.height = this.myTileSprite6.height = this.myCamera.height + this.myCamera.lerp * 2;
-
+    
     // cursor controls
     if (this.inputs.keyboard.arrowUp) {
         this.mySprite.y -= this.time.toPPS(180);
@@ -79,7 +74,13 @@ gameState.update = function () {
     }
 
     // camera follow
-    //this.myCamera.follow(this.mySprite);
+    this.myCamera.follow(this.mySprite);
+
+    this.myTileSprite1.x      = this.myTileSprite2.x      = this.myTileSprite3.x      = this.myTileSprite4.x      = this.myTileSprite5.x      = this.myTileSprite6.x      = this.myCamera.x      - this.myCamera.lerp;
+    this.myTileSprite1.y      = this.myTileSprite2.y      = this.myTileSprite3.y      = this.myTileSprite4.y      = this.myTileSprite5.y      = this.myTileSprite6.y      = this.myCamera.y      - this.myCamera.lerp;
+    this.myTileSprite1.width  = this.myTileSprite2.width  = this.myTileSprite3.width  = this.myTileSprite4.width  = this.myTileSprite5.width  = this.myTileSprite6.width  = this.myCamera.width  + this.myCamera.lerp * 2;
+    this.myTileSprite1.height = this.myTileSprite2.height = this.myTileSprite3.height = this.myTileSprite4.height = this.myTileSprite5.height = this.myTileSprite6.height = this.myCamera.height + this.myCamera.lerp * 2;
+
 };
 
 gameState.postRender = function () {

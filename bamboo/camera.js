@@ -9,8 +9,6 @@ var Camera = function (pName, pScreen) {
     self.height = pScreen.height;
     self.anchorX = 0.5;
     self.anchorY =  0.5;
-    self.offsetX = 0;
-    self.offsetY = 0;
     self.angle = 0;
     self.lerp = 1;
     self.zoom = 1.0;
@@ -18,8 +16,8 @@ var Camera = function (pName, pScreen) {
 
     self.follow = function (pEntity) {
         if (self.lerp < 1) { self.lerp = 1;}
-        var destinationX = self.zoom * (pEntity.x + pEntity.width  / 2) - (self.width  / 2) + self.offsetX;
-        var destinationY = self.zoom * (pEntity.y + pEntity.height / 2) - (self.height / 2) + self.offsetY;
+        var destinationX = self.zoom * (pEntity.x + pEntity.width  / 2) - (self.width  / 2);
+        var destinationY = self.zoom * (pEntity.y + pEntity.height / 2) - (self.height / 2);
         self.x += (destinationX - self.x) / self.lerp;
         self.y += (destinationY - self.y) / self.lerp;
     }
