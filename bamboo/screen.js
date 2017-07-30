@@ -7,10 +7,10 @@ var Screen = function () {
     self.grid = 12;
 
     self.init = function () {
-        self.resize(window.innerWidth, window.innerHeight);
-        window.addEventListener('resize', function () {
+        self.resize(window.innerWidth, window.innerHeight - 50);
+        /*window.addEventListener('resize', function () {
             self.resize(window.innerWidth, window.innerHeight);
-        });
+        });*/
     }
 
     self.resize = function (pWidth, pHeight) {
