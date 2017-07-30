@@ -33,6 +33,8 @@ var State = function (pName) {
     self.beforeCreate = function () {};
 
     self.create = function () {};
+
+    self.afterCreate = function () {};
     
     self.update = function () {};
 

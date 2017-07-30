@@ -38,7 +38,7 @@ var Game = function (pFPS, pCanvas) {
 
                 // ----------------------------------------------- after preload
 
-                    self.currentState.loading();
+                self.currentState.loading();
 
                 // ------------------------------------------------------ create
 
@@ -51,6 +51,9 @@ var Game = function (pFPS, pCanvas) {
 
                     self.currentState.created = true;
                     self.currentState.create();
+
+                    // after create
+                    self.currentState.afterCreate();
                 }
 
                 // ------------------------------------------------------ update

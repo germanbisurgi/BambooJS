@@ -30,17 +30,7 @@ loadState.loading = function () {
     loadingProgress.innerText = this.assets.loadProgress().percent + '%' + this.assets.loadProgress().lastLoaded;
 };
 
-loadState.beforeCreate = function () {
-    var loadScreen = document.querySelector('.loading');
-    loadScreen.classList.remove('show');
-};
-
-
 loadState.create = function () {
     this.game.switchState('gameState');
 };
 
-loadState.postRender = function () {
-    this.renderer.context.fillText('load progress: ' + this.assets.loadProgress().percent + '%', 200, 30);
-    this.renderer.context.fillText('last loaded:     ' + this.assets.loadProgress().lastLoaded, 200, 45);
-};

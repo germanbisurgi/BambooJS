@@ -23,6 +23,12 @@ gameState.create = function () {
     
 };
 
+gameState.afterCreate = function () {
+    var loadScreen = document.querySelector('.loading');
+    loadScreen.classList.remove('show');
+};
+
+
 gameState.update = function () {
 
     var keyboard = this.inputs.keyboard;
