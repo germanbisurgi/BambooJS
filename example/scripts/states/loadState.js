@@ -27,13 +27,13 @@ loadState.preload = function () {
 };
 
 loadState.loading = function () {
-    console.log('after preload')
+    console.log('loading')
     var loadingProgress = document.querySelector('.loading-progress');
     loadingProgress.innerText = this.assets.loadProgress().percent + '%' + this.assets.loadProgress().lastLoaded;
 };
 
 loadState.beforeCreate = function () {
-    console.log('after preload')
+    console.log('before create')
     var loadScreen = document.querySelector('.loading');
     loadScreen.classList.remove('show');
 };
