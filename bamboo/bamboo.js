@@ -12,5 +12,6 @@ var Bamboo = {
     entity: Entity,
     texture: Texture,
     camera: Camera,
-    sprite: Sprite
+    sprite: Sprite,
+    tileSprite: TileSprite
 };
