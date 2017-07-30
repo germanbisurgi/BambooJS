@@ -1,7 +1,6 @@
 var loadState = new Bamboo.state('loadState');
 
 loadState.beforePreload = function () {
-    console.log('before preload')
     var loadScreen = document.querySelector('.loading');
     loadScreen.classList.add('show');
 };
@@ -27,13 +26,11 @@ loadState.preload = function () {
 };
 
 loadState.loading = function () {
-    console.log('loading');
     var loadingProgress = document.querySelector('.loading-progress');
     loadingProgress.innerText = this.assets.loadProgress().percent + '%' + this.assets.loadProgress().lastLoaded;
 };
 
 loadState.beforeCreate = function () {
-    console.log('before create');
     var loadScreen = document.querySelector('.loading');
     loadScreen.classList.remove('show');
 };
