@@ -24,21 +24,24 @@ var Game = function (pWidth, pHeight, pFPS, pCanvas) {
                     self.currentState.init();
                 }
 
-                // ---------------------------------------------- before preload
-
-                self.currentState.beforePreload();
+                
 
                 // ----------------------------------------------------- preload
 
                 if (!self.currentState.preloaded) {
+
+                    // ------------------------------------------ before preload
+
+                    self.currentState.beforePreload();
+
                     self.currentState.preloaded = true;
                     self.currentState.preload();
                     self.assets.loadAll();
+
+                    // ------------------------------------------- after preload
+
+                    self.currentState.afterPreload();
                 }
-
-                // ---------------------------------------------- after preload
-
-                self.currentState.afterPreload();
 
                 // ------------------------------------------------------ create
 
