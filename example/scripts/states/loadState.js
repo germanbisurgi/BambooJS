@@ -2,7 +2,9 @@ var loadState = new Bamboo.state('loadState');
 
 loadState.beforePreload = function () {
     var loadScreen = document.querySelector('.loading');
+    var loadingProgress = document.querySelector('.loading-progress');
     loadScreen.classList.add('show');
+    loadingProgress.innerText = this.assets.loadProgress().percent + '%' + this.assets.loadProgress().lastLoaded
 };
 
 loadState.preload = function () {
