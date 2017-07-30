@@ -1,4 +1,4 @@
-var Game = function (pWidth, pHeight, pFPS, pCanvas) {
+var Game = function (pFPS, pCanvas) {
     'use strict';
     var self = this;
     self.states = [];
@@ -9,7 +9,7 @@ var Game = function (pWidth, pHeight, pFPS, pCanvas) {
     self.loop = new Bamboo.loop(pFPS);
     self.assets = new Bamboo.assets();
     self.inputs = new Bamboo.inputs(pCanvas);
-    self.screen = new Bamboo.screen(pWidth, pHeight, pCanvas);
+    self.screen = new Bamboo.screen();
     self.renderer = new Bamboo.renderer(pCanvas);
 
     self.init = function () {

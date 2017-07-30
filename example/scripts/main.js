@@ -1,6 +1,6 @@
 // ------------------------------------------------------------- new bamboo game
 var canvas = document.querySelector('.game-canvas')
-var game = new Bamboo.game(400, 200, 70, canvas);
+var game = new Bamboo.game(70, canvas);
 
 // ------------------------------------------------------------------ add states
 
