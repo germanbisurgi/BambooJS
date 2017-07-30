@@ -20,20 +20,20 @@ loadState.preload = function () {
     this.assets.loadTexture('stone', 'example/assets/images/stone.png');
     this.assets.loadTexture('player', 'example/assets/images/player.png', 32, 32);
     this.assets.loadTexture('tanks', 'example/assets/images/tanks.png', 32, 32);
-    this.assets.loadAudio('tic', 'example/assets/audio/tic.mp3');
-    this.assets.loadAudio('laser', 'example/assets/audio/laser.mp3');
-    this.assets.loadAudio('shot', 'example/assets/audio/shot.mp3');
-    this.assets.loadAudio('motor', 'example/assets/audio/motor.mp3');
+    //this.assets.loadAudio('tic', 'example/assets/audio/tic.mp3');
+    //this.assets.loadAudio('laser', 'example/assets/audio/laser.mp3');
+    //this.assets.loadAudio('shot', 'example/assets/audio/shot.mp3');
+    //this.assets.loadAudio('motor', 'example/assets/audio/motor.mp3');
 };
 
 loadState.loading = function () {
-    console.log('loading')
+    console.log('loading');
     var loadingProgress = document.querySelector('.loading-progress');
     loadingProgress.innerText = this.assets.loadProgress().percent + '%' + this.assets.loadProgress().lastLoaded;
 };
 
 loadState.beforeCreate = function () {
-    console.log('before create')
+    console.log('before create');
     var loadScreen = document.querySelector('.loading');
     loadScreen.classList.remove('show');
 };
