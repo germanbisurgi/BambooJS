@@ -11,7 +11,6 @@ physicsState.afterCreate = function () {
 };
 
 physicsState.update = function () {
-    this.myEntity.angle += this.time.toPPS(90);
 };
 
 physicsState.postRender = function () {

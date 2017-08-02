@@ -22,8 +22,6 @@ gameState.create = function () {
     this.mySprite.addAnimation('down', [1, 2, 1, 0], 100);
     this.mySprite.addAnimation('left', [13, 14, 13, 12], 100);
 
-    this.disc = entities.addImage('disc', 100, 50, 100, 100);
-
     events.on('downPressed', function () {
         console.log('down pressed');
     });
@@ -37,8 +35,6 @@ gameState.afterCreate = function () {
 
 
 gameState.update = function () {
-
-    this.disc.angle += this.time.toPPS(60)
 
     var keyboard = this.inputs.keyboard;
     
