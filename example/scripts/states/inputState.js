@@ -1,7 +1,7 @@
 var inputState = new Bamboo.state('inputState');
 
 inputState.create = function () {
-    this.myEntity = this.entities.add(50, 50, 50, 50);
+    this.myEntity = this.entities.addImage(50, 50, 50, 50);
 };
 
 inputState.update = function () {

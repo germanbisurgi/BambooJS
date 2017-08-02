@@ -6,6 +6,7 @@ loadState.beforePreload = function () {
 };
 
 loadState.preload = function () {
+    this.assets.loadTexture('disc', 'example/assets/images/disc.png');
     this.assets.loadTexture('grass', 'example/assets/images/grass.jpg');
     this.assets.loadTexture('landscape1', 'example/assets/images/landscape1.png');
     this.assets.loadTexture('landscape2', 'example/assets/images/landscape2.png');

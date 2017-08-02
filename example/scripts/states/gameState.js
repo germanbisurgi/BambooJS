@@ -9,6 +9,8 @@ gameState.create = function () {
     this.myCamera = this.cameras.current;
     this.cameras.current.lerp = 1;
 
+    this.disc = entities.addImage('disc', 50, 50, 50, 50);
+
     this.myTileSprite6 = entities.addTileSprite('landscape6', 0, 0, screen.width, screen.height);
     this.myTileSprite5 = entities.addTileSprite('landscape5', 0, 0, screen.width, screen.height);
     this.myTileSprite4 = entities.addTileSprite('landscape4', 0, 0, screen.width, screen.height);
@@ -86,7 +88,7 @@ gameState.update = function () {
     }
 
     // camera follow
-    this.myCamera.follow(this.mySprite);
+    //this.myCamera.follow(this.mySprite);
 
     this.myTileSprite1.x      = this.myTileSprite2.x      = this.myTileSprite3.x      = this.myTileSprite4.x      = this.myTileSprite5.x      = this.myTileSprite6.x      = this.myCamera.x      - this.myCamera.lerp;
     this.myTileSprite1.y      = this.myTileSprite2.y      = this.myTileSprite3.y      = this.myTileSprite4.y      = this.myTileSprite5.y      = this.myTileSprite6.y      = this.myCamera.y      - this.myCamera.lerp;

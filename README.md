@@ -3,4 +3,4 @@
 
 DISCLAIMER: this is another "reinvent the wheel project". Don´t use it :) . 
 
-[test](https://germanbisurgi.github.io/bambooJS/)
+[test](https://germanbisurgi.github.io/BambooJS/)
