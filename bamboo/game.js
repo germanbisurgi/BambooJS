@@ -59,6 +59,7 @@ var Game = function (pFPS, pCanvas) {
                 // ------------------------------------------------------ update
 
                 if (self.currentState.created) {
+                    self.currentState.events.update();
                     self.currentState.update();
                     self.currentState.time.update(self.loop.delta);
                 

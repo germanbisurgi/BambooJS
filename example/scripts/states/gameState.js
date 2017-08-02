@@ -4,6 +4,7 @@ gameState.create = function () {
 
     var screen = this.screen;
     var entities = this.entities;
+    var events = this.events;
 
     this.myCamera = this.cameras.current;
     this.cameras.current.lerp = 1;
@@ -20,6 +21,10 @@ gameState.create = function () {
     this.mySprite.addAnimation('right', [25, 26, 25, 24], 100);
     this.mySprite.addAnimation('down', [1, 2, 1, 0], 100);
     this.mySprite.addAnimation('left', [13, 14, 13, 12], 100);
+
+    events.on('downPressed', function () {
+        console.log('down pressed');
+    });
     
 };
 
@@ -51,6 +56,7 @@ gameState.update = function () {
     if (keyboard.arrowDown) {
         this.mySprite.y += this.time.toPPS(180);
         this.mySprite.play('down');
+        gameState.events.emit('downPressed');
     }
     if (keyboard.arrowLeft) {
         this.mySprite.x -= this.time.toPPS(180);

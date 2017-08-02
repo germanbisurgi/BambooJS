@@ -5,6 +5,7 @@ var Bamboo = {
     screen: Screen,
     inputs: Inputs,
     renderer: Renderer,
+    events: Events,
     state: State,
     entityManager: EntityManager,
     timeManager: TimeManager,
