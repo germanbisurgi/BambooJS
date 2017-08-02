@@ -32,6 +32,6 @@ loadState.loading = function () {
 };
 
 loadState.create = function () {
-    this.game.switchState('gameState');
+    this.game.switchState('physicsState');
 };
 

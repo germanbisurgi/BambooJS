@@ -10,6 +10,9 @@
         <!-- game canvas -->
         <canvas class="game-canvas"></canvas>
 
+        <!-- physics canvas -->
+        <canvas class="physics-canvas"></canvas>
+
         <!-- loading screen -->
         <div class="loading">
             <p class="loading-progress"></p>
@@ -23,6 +26,7 @@
 
         <!-- libraries -->
         <script src="bamboo/tween.js"></script>
+        <script src="bamboo/box2dweb.js"></script>
 
         <!-- bamboo modules -->
         <script src="bamboo/game.js"></script>
@@ -32,6 +36,7 @@
         <script src="bamboo/screen.js"></script>
         <script src="bamboo/renderer.js"></script>
         <script src="bamboo/events.js"></script>
+        <script src="bamboo/physics.js"></script>
         <script src="bamboo/state.js"></script>
         <script src="bamboo/entityManager.js"></script>
         <script src="bamboo/timeManager.js"></script>
@@ -47,7 +52,7 @@
 
         <!-- states -->
         <script src="example/scripts/states/gameState.js"></script>
-        <script src="example/scripts/states/inputState.js"></script>
+        <script src="example/scripts/states/physicsState.js"></script>
         <script src="example/scripts/states/loadState.js"></script>
 
         <!-- main script -->

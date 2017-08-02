@@ -12,16 +12,15 @@ var State = function (pName) {
     self.inputs = null;
     self.screen = null;
     self.renderer = null;
-    
 
     self.init = function () {
+        self.physics = new Bamboo.physics();
         self.time = new Bamboo.timeManager(self.game);
         self.entities = new Bamboo.entityManager(self.game);
         self.cameras = new Bamboo.cameraManager(self.screen);
         self.events = new Bamboo.events();
         self.initialized = true;
     };
-
 
     // ------------------------------------------------------------ core methods
 

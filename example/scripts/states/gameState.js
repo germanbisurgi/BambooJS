@@ -9,8 +9,6 @@ gameState.create = function () {
     this.myCamera = this.cameras.current;
     this.cameras.current.lerp = 1;
 
-    this.disc = entities.addImage('disc', 50, 50, 50, 50);
-
     this.myTileSprite6 = entities.addTileSprite('landscape6', 0, 0, screen.width, screen.height);
     this.myTileSprite5 = entities.addTileSprite('landscape5', 0, 0, screen.width, screen.height);
     this.myTileSprite4 = entities.addTileSprite('landscape4', 0, 0, screen.width, screen.height);
@@ -23,6 +21,8 @@ gameState.create = function () {
     this.mySprite.addAnimation('right', [25, 26, 25, 24], 100);
     this.mySprite.addAnimation('down', [1, 2, 1, 0], 100);
     this.mySprite.addAnimation('left', [13, 14, 13, 12], 100);
+
+    this.disc = entities.addImage('disc', 100, 50, 100, 100);
 
     events.on('downPressed', function () {
         console.log('down pressed');
@@ -37,6 +37,8 @@ gameState.afterCreate = function () {
 
 
 gameState.update = function () {
+
+    this.disc.angle += this.time.toPPS(60)
 
     var keyboard = this.inputs.keyboard;
     

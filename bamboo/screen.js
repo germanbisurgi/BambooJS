@@ -1,16 +1,13 @@
-var Screen = function () {
+var Screen = function (pWidth, pHeight) {
     'use strict';
     var self = this;
 
-    self.width = 400;//window.innerWidth;
-    self.height = 200;//window.innerHeight;
+    self.width = pWidth || 400;
+    self.height = pHeight || 200;
     self.grid = 12;
 
     self.init = function () {
-        self.resize(400, 200);
-        /*window.addEventListener('resize', function () {
-            self.resize(window.innerWidth, window.innerHeight);
-        });*/
+        //self.resize(400, 200);
     }
 
     self.resize = function (pWidth, pHeight) {
