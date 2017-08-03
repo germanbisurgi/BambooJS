@@ -14,6 +14,124 @@ var Physics = function() {
     "use strict";
     var self = this;
 
-    self.init = function () {
+    self.initialized = false;
+    self.scale = 30;
+    self.FPS = null;
+    self.world = null;
+    self.debugContext = null;
+
+    self.init = function (pFPS, pGravityX, pGravityY, pAllowSleep, pDebugContext) {
+        self.FPS = pFPS;
+        self.world = new b2World({x: pGravityX, y: pGravityY}, pAllowSleep);
+        self.debugContext = pDebugContext;
+        var debugDraw = new b2DebugDraw();
+        debugDraw.SetSprite(self.debugContext);
+        debugDraw.SetDrawScale(self.scale);
+        debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
+        self.world.SetDebugDraw(debugDraw);
+        self.initialized = true;
+    };
+
+    self.addCircle = function (pX1, pY1, pRadius, pType) {
+        var body = self.body(pX1, pY1, pType);
+        var fixture = self.circle(pRadius);
+        body.CreateFixture(fixture);
+        return body;
+    };
+
+    self.addRectangle = function (pX1, pY1, pWidth, pHeight, pType) {
+        var body = self.body(pX1, pY1, pType);
+        var fixture = self.rectangle(pWidth, pHeight);
+        body.CreateFixture(fixture);
+        return body;
+    };
+
+    self.addEdge = function (pX1, pY1, pX2, pY2, pType) {
+        var body = self.body(pX1, pY1, pType);
+        var fixture = self.edge(0, 0, pX2-pX1, pY2-pY1);
+        body.CreateFixture(fixture);
+        return body;
+    };
+
+    self.body = function(pX, pY, type) {
+        var bodyDef = new b2BodyDef();
+        bodyDef.position.x      = pX / self.scale;
+        bodyDef.position.y      = pY / self.scale;
+        bodyDef.active          = true;
+        bodyDef.allowSleep      = true;
+        bodyDef.angle           = 0;
+        bodyDef.angularDamping  = 0;
+        bodyDef.angularVelocity = 0;
+        bodyDef.awake           = true;
+        bodyDef.bullet          = false;
+        bodyDef.fixedRotation   = false;
+        bodyDef.linearDamping   = 0;
+        bodyDef.linearVelocity  = {'x': 0, 'y': 0};
+        bodyDef.userData        = '';
+        if (type === 'static')    {bodyDef.type = b2Body.b2_staticBody;}
+        if (type === 'dynamic')   {bodyDef.type = b2Body.b2_dynamicBody;}
+        if (type === 'kinematic') {bodyDef.type = b2Body.b2_kinematicBody;}
+        var body = self.world.CreateBody(bodyDef);
+        return body;
+    };
+
+    self.circle = function(pRadius) {
+        var fixDef = new b2FixtureDef();
+        fixDef.density     = 1;
+        fixDef.friction    = 0.5;
+        fixDef.isSensor    = false;
+        fixDef.restitution = 0.0;
+        fixDef.shape = new b2CircleShape(pRadius / self.scale);
+        return fixDef;
+    };
+
+    self.rectangle = function(pWidth, pHeight) {
+        var fixDef = new b2FixtureDef();
+        fixDef.density     = 1;
+        fixDef.friction    = 0.5;
+        fixDef.isSensor    = false;
+        fixDef.restitution = 0.0;
+        fixDef.shape = new b2PolygonShape();
+        fixDef.shape.SetAsBox(pWidth * 0.5 / self.scale, pHeight * 0.5 / self.scale);
+        return fixDef;
+    };    
+
+    self.polygon = function(pPoints) {
+        var fixDef = new b2FixtureDef();
+        fixDef.density     = 1;
+        fixDef.friction    = 0.5;
+        fixDef.isSensor    = false;
+        fixDef.restitution = 0.0;
+        fixDef.shape = new b2PolygonShape();
+        pPoints.forEach(function (point) {
+            point.x /= self.scale;
+            point.y /= self.scale;
+        });
+        fixDef.shape.SetAsArray(pPoints, pPoints.length);
+        return fixDef;
+    };
+
+    self.edge = function(pX1, pY1, pX2, pY2) {
+        var fixDef = new b2FixtureDef();
+        fixDef.density     = 1;
+        fixDef.friction    = 0.5;
+        fixDef.isSensor    = false;
+        fixDef.restitution = 0.5;
+        fixDef.shape = new b2PolygonShape();
+        pX1 /= self.scale;
+        pY1 /= self.scale;
+        pX2 /= self.scale;
+        pY2 /= self.scale;
+        fixDef.shape.SetAsEdge({x: pX1, y: pY1}, {x: pX2, y: pY2});
+        return fixDef;
+    };
+
+    self.update = function() {
+        self.world.Step(1/self.FPS, 8, 3);
+        self.world.ClearForces();
+    };
+
+    self.debugDraw = function() {
+        self.world.DrawDebugData();
     };
 };

@@ -60,12 +60,17 @@ var Game = function (pWidth, pHeight, pFPS, pCanvas) {
 
                 if (self.currentState.created) {
                     self.currentState.events.update();
+                    if (self.currentState.physics.initialized) {
+                        self.currentState.physics.update();
+                    }
                     self.currentState.update();
                     self.currentState.time.update(self.loop.delta);
                 
                     // -------------------------------------------------- render
 
-                    //self.renderer.clear();
+                    if (self.currentState.physics.initialized) {
+                        self.currentState.physics.debugDraw();
+                    }
                     
                     self.renderer.draw(
                         self.currentState.entities.pool,
