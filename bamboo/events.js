@@ -1,13 +1,35 @@
+/**
+* Used to create custom events and attach to them one or more listeners that
+* can be triggered once or multiple times.
+* @class Events
+* @constructor
+*/
 var Events = function () {
 	'use strict';
 	var self = this;
 
+	/**
+	* All the created events
+	* @property pool
+	* @type {Events Array}
+	*/
 	self.pool = [];
-	self.emitted = [];
+
 
 	/**
-     * Returns the event if exists.
-     */
+	* All the emitted events the will be triggered in the next update call
+	* @property emitted
+	* @type {Emitted events Array}
+	*/
+	self.emitted = [];
+
+	
+    /**
+	* Returns the event if exists.
+	* @method get
+	* @param {String} eventName
+	* @return {Event}
+	*/
 	self.get = function (pEventName) {
 		var output = false;
 		self.pool.forEach(function (event) {
@@ -18,16 +40,25 @@ var Events = function () {
 		return output;
 	}
 
-	/**
-     * Returns the event listeners.
-     */
+	
+    /**
+	* Returns the listeners of an event.
+	* @method getListeners
+	* @param {event} Event
+	* @return {Listeners array}
+	*/
 	self.getListeners = function (pEvent) {
 		return pEvent.listeners;
 	}
 
-	/**
-     * Returns the listener of an event if it have it.
-     */
+	
+    /**
+	* Returns the listener of an event if it have it.
+	* @method getListener
+	* @param {event} Event
+	* @param {listener} Listener (the function that will be called)
+	* @return {Listeners}
+	*/
 	self.getListener = function (pEvent, pListener) {
 		var output = false;
 		pEvent.listeners.forEach(function (listener) {
@@ -38,10 +69,15 @@ var Events = function () {
 		return output;
 	}
 
-	/**
-     * creates an event and adds to it an event listener.
-     * If the event already existe it just adds the listener to the event.
-     */
+	
+    /**
+	* Creates an event and adds to it an event listener.
+	* If the event already exists, it just adds the listener to the event.
+	* @method on
+	* @param {String} Event name
+	* @param {function} Listener (the function that will be called)
+	* @param {Number} Priority. The smaller the higher the priority.
+	*/
 	self.on = function (pEventName, pListener, pPriority, pOnce) {
 		var event = self.get(pEventName);
 		var listener = {
@@ -61,17 +97,26 @@ var Events = function () {
 		}
 	}
 
-	/**
-     * The same as "on" but the listener will be executed only once.
-     */
+	
+    /**
+	* The same as "on" but the listener will be executed only once.
+	* @method once
+	* @param {String} Event name
+	* @param {function} Listener (the function that will be called)
+	* @param {Number} Priority. The smaller the higher the priority.
+	*/
 	self.once = function (pEventName, pListener, pPriority) {
 		self.on(pEventName, pListener, pPriority, true);
 	}
 
-	/**
-     * Removes a listener of an event. If the event have no more listeners
-     * the event will be removed to.
-     */
+	
+    /**
+	* Removes a listener of an event. If the event have no more listeners
+	* the event will be removed to.
+	* @method off
+	* @param {String} Event name
+	* @param {function} Listener (the function that will be called)
+	*/
 	self.off = function (pEventName, pListener) {
 		var event = self.get(pEventName);
 		if (!event) {
@@ -91,10 +136,13 @@ var Events = function () {
 		}
 	}
 
-	/**
-     * Add the event to the emitted events pool. The listeners of this events
-     * will be emitted when the "update" method will be called.
-     */
+	
+    /**
+	* Adds the event to the emitted events pool. The listeners of this events
+	* will be emitted when the "update" method will be called in order of priority.
+	* @method emit
+	* @param {String} Event name
+	*/
 	self.emit = function (pEventName) {
 		var event = self.get(pEventName)
 		if (event) {
@@ -102,17 +150,21 @@ var Events = function () {
 		}
 	}
 
-	/**
-     * Removes all events
-     */
+	
+    /**
+	* Removes all events in the pool.
+	* @method clear
+	*/
 	self.clear = function () {
 		self.pool = [];
 	}
 
-	/**
-     * Call all the listeners functions of the emitted events order by priority.
-     * Removes the listeners that have "once = true" after triggering 
-     */
+	
+    /**
+	* Call all the listeners functions of the emitted events order by priority.
+	* and removes the listeners that have trigger only once.
+	* @method update
+	*/
 	self.update = function () {
 		if (self.emitted !== []) {
 			self.emitted.forEach(function (event) {
