@@ -27,33 +27,52 @@ var Physics = function() {
         var debugDraw = new b2DebugDraw();
         debugDraw.SetSprite(self.debugContext);
         debugDraw.SetDrawScale(self.scale);
-        debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
+        debugDraw.SetFlags(b2DebugDraw.e_shapeBit || b2DebugDraw.e_jointBit);
         self.world.SetDebugDraw(debugDraw);
         self.initialized = true;
     };
 
-    self.addCircle = function (pX1, pY1, pRadius, pType) {
-        var body = self.body(pX1, pY1, pType);
-        var fixture = self.circle(pRadius);
-        body.CreateFixture(fixture);
-        return body;
+    self.addCircle = function (pBody, pRadius, pOffsetX, pOffsetY) {
+        var fixtureDef = self.circle(pRadius);
+        fixtureDef.shape.m_p = {x: pOffsetX / self.scale || 0, y: pOffsetY / self.scale || 0};
+        var fixture = pBody.CreateFixture(fixtureDef);
+        return fixture;
     };
 
-    self.addRectangle = function (pX1, pY1, pWidth, pHeight, pType) {
-        var body = self.body(pX1, pY1, pType);
-        var fixture = self.rectangle(pWidth, pHeight);
-        body.CreateFixture(fixture);
-        return body;
+    self.addRectangle = function (pBody, pWidth, pHeight, pOffsetX, pOffsetY) {
+        var fixtureDef = self.rectangle(pWidth, pHeight);
+        fixtureDef.shape.m_vertices.forEach(function (vert) {
+            vert.x +=  pOffsetX / self.scale || 0;
+            vert.y +=  pOffsetY / self.scale || 0;
+        });
+        fixtureDef.shape.m_centroid.x +=  pOffsetX / self.scale || 0;
+        fixtureDef.shape.m_centroid.y +=  pOffsetY / self.scale || 0;
+        console.log(fixtureDef.shape.m_centroid);
+        var fixture = pBody.CreateFixture(fixtureDef);
+        return fixture;
     };
 
     self.addEdge = function (pX1, pY1, pX2, pY2, pType) {
-        var body = self.body(pX1, pY1, pType);
+        var body = self.addBody(pX1, pY1, pType);
         var fixture = self.edge(0, 0, pX2-pX1, pY2-pY1);
         body.CreateFixture(fixture);
         return body;
     };
 
-    self.body = function(pX, pY, type) {
+    self.followBody = function (entity, body) {
+        entity.x = body.GetPosition().x * 30 - entity.width / 2;
+        entity.y = body.GetPosition().y * 30 - entity.height / 2;
+        entity.angle = body.GetAngle() * 57.295779513082320876;
+    };
+
+    self.followFixture = function (entity, fixture) {
+        var body = fixture.GetBody();
+        entity.x = (fixture.GetAABB().GetCenter().x * 30 - entity.width / 2);
+        entity.y = (fixture.GetAABB().GetCenter().y * 30 - entity.height / 2);
+        entity.angle = body.GetAngle() * 57.295779513082320876;
+    };
+
+    self.addBody = function(pX, pY, type) {
         var bodyDef = new b2BodyDef();
         bodyDef.position.x      = pX / self.scale;
         bodyDef.position.y      = pY / self.scale;
@@ -132,6 +151,8 @@ var Physics = function() {
     };
 
     self.debugDraw = function() {
-        self.world.DrawDebugData();
+        if (self.debugContext) {
+            self.world.DrawDebugData();
+        }
     };
 };

@@ -4,7 +4,7 @@ var Renderer = function (pCanvas) {
 
     self.canvas = pCanvas;
     self.context = self.canvas.getContext("2d");
-    
+
     // ------------------------------------------------------------ core methods
 
     self.clear = function () {
