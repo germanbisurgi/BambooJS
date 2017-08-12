@@ -47,7 +47,12 @@ var Physics = function() {
         });
         fixtureDef.shape.m_centroid.x +=  pOffsetX / self.scale || 0;
         fixtureDef.shape.m_centroid.y +=  pOffsetY / self.scale || 0;
-        console.log(fixtureDef.shape.m_centroid);
+        var fixture = pBody.CreateFixture(fixtureDef);
+        return fixture;
+    };
+
+    self.addPolygon = function (pBody, pPoints) {
+        var fixtureDef = self.polygon(pPoints);
         var fixture = pBody.CreateFixture(fixtureDef);
         return fixture;
     };
@@ -94,33 +99,30 @@ var Physics = function() {
         return body;
     };
 
-    self.circle = function(pRadius) {
+    self.getFixtureDef = function() {
         var fixDef = new b2FixtureDef();
         fixDef.density     = 1;
         fixDef.friction    = 0.5;
         fixDef.isSensor    = false;
         fixDef.restitution = 0.0;
+        return fixDef;
+    };
+
+    self.circle = function(pRadius) {
+        var fixDef = self.getFixtureDef();
         fixDef.shape = new b2CircleShape(pRadius / self.scale);
         return fixDef;
     };
 
     self.rectangle = function(pWidth, pHeight) {
-        var fixDef = new b2FixtureDef();
-        fixDef.density     = 1;
-        fixDef.friction    = 0.5;
-        fixDef.isSensor    = false;
-        fixDef.restitution = 0.0;
+        var fixDef = self.getFixtureDef();
         fixDef.shape = new b2PolygonShape();
         fixDef.shape.SetAsBox(pWidth * 0.5 / self.scale, pHeight * 0.5 / self.scale);
         return fixDef;
     };    
 
     self.polygon = function(pPoints) {
-        var fixDef = new b2FixtureDef();
-        fixDef.density     = 1;
-        fixDef.friction    = 0.5;
-        fixDef.isSensor    = false;
-        fixDef.restitution = 0.0;
+        var fixDef = self.getFixtureDef();
         fixDef.shape = new b2PolygonShape();
         pPoints.forEach(function (point) {
             point.x /= self.scale;
@@ -131,11 +133,7 @@ var Physics = function() {
     };
 
     self.edge = function(pX1, pY1, pX2, pY2) {
-        var fixDef = new b2FixtureDef();
-        fixDef.density     = 1;
-        fixDef.friction    = 0.5;
-        fixDef.isSensor    = false;
-        fixDef.restitution = 0.5;
+        var fixDef = self.getFixtureDef();
         fixDef.shape = new b2PolygonShape();
         pX1 /= self.scale;
         pY1 /= self.scale;
