@@ -64,20 +64,20 @@ var Physics = function() {
         return body;
     };
 
-    self.followBody = function (entity, body) {
-        entity.x = body.GetPosition().x * 30 - entity.width / 2;
-        entity.y = body.GetPosition().y * 30 - entity.height / 2;
-        entity.angle = body.GetAngle() * 57.295779513082320876;
+    self.followBody = function (pEntity, pBody) {
+        pEntity.x = pBody.GetPosition().x * 30 - pEntity.width / 2;
+        pEntity.y = pBody.GetPosition().y * 30 - pEntity.height / 2;
+        pEntity.angle = pBody.GetAngle() * 57.295779513082320876;
     };
 
-    self.followFixture = function (entity, fixture) {
-        var body = fixture.GetBody();
-        entity.x = (fixture.GetAABB().GetCenter().x * 30 - entity.width / 2);
-        entity.y = (fixture.GetAABB().GetCenter().y * 30 - entity.height / 2);
-        entity.angle = body.GetAngle() * 57.295779513082320876;
+    self.followFixture = function (pEntity, pFixture) {
+        var body = pFixture.GetBody();
+        pEntity.x = (pFixture.GetAABB().GetCenter().x * 30 - pEntity.width  / 2);
+        pEntity.y = (pFixture.GetAABB().GetCenter().y * 30 - pEntity.height / 2);
+        pEntity.angle = body.GetAngle() * 57.295779513082320876;
     };
 
-    self.addBody = function(pX, pY, type) {
+    self.addBody = function(pX, pY, pType) {
         var bodyDef = new b2BodyDef();
         bodyDef.position.x      = pX / self.scale;
         bodyDef.position.y      = pY / self.scale;
@@ -92,9 +92,9 @@ var Physics = function() {
         bodyDef.linearDamping   = 0;
         bodyDef.linearVelocity  = {'x': 0, 'y': 0};
         bodyDef.userData        = '';
-        if (type === 'static')    {bodyDef.type = b2Body.b2_staticBody;}
-        if (type === 'dynamic')   {bodyDef.type = b2Body.b2_dynamicBody;}
-        if (type === 'kinematic') {bodyDef.type = b2Body.b2_kinematicBody;}
+        if (pType === 'static')    {bodyDef.type = b2Body.b2_staticBody;}
+        if (pType === 'dynamic')   {bodyDef.type = b2Body.b2_dynamicBody;}
+        if (pType === 'kinematic') {bodyDef.type = b2Body.b2_kinematicBody;}
         var body = self.world.CreateBody(bodyDef);
         return body;
     };
