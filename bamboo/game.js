@@ -1,4 +1,4 @@
-var Game = function (pWidth, pHeight, pFPS, pCanvas) {
+var Game = function (pConfig) {
     'use strict';
     var self = this;
     self.states = [];
@@ -6,13 +6,23 @@ var Game = function (pWidth, pHeight, pFPS, pCanvas) {
 
     // -------------------------------------------------------------------- init
 
-    self.loop = new Bamboo.loop(pFPS);
+    self.loop = new Bamboo.loop(pConfig.FPS);
     self.assets = new Bamboo.assets();
-    self.inputs = new Bamboo.inputs(pCanvas);
-    self.screen = new Bamboo.screen(pWidth, pHeight);
-    self.renderer = new Bamboo.renderer(pCanvas);
+    self.inputs = new Bamboo.inputs(pConfig.canvas);
+    self.screen = new Bamboo.screen(pConfig.width, pConfig.height);
+    self.renderer = new Bamboo.renderer(pConfig.canvas);
 
-    self.init = function () {
+    self.start = function () {
+
+        // ---------------------------------------------------------- add states
+
+        pConfig.states.forEach(function (state) {
+            self.addState(state);
+        });
+
+        // -------------------------------------------------- load initial state
+
+        self.switchState(pConfig.initialState);
         
         self.loop.start(function () {
 
@@ -88,11 +98,6 @@ var Game = function (pWidth, pHeight, pFPS, pCanvas) {
     };
 
     // ------------------------------------------------------------ core methods
-
-    self.start = function(pStateName) {
-        game.switchState(pStateName);
-        self.init();
-    };
 
     self.addState = function(pState) {
         pState.game = self;

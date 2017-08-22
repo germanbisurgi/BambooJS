@@ -11,26 +11,26 @@ var Renderer = function (pCanvas) {
         self.context.clearRect(0, 0, window.innerWidth, window.innerHeight);
     };
 
-    self.draw = function (entities, camera, screen) {
-        canvas.width = screen.width;
-        canvas.height = screen.height;
+    self.draw = function (pEntities, pCamera, pScreen) {
+        canvas.width = pScreen.width;
+        canvas.height = pScreen.height;
         
         self.context.save();
         // camera width and height
-        camera.width = screen.width;
-        camera.height = screen.height;
+        pCamera.width = pScreen.width;
+        pCamera.height = pScreen.height;
         // camera rotation
-        self.context.translate((camera.width * camera.anchorX), (camera.height * camera.anchorY));
-        self.context.rotate(self.toRadians(-camera.angle));
-        self.context.translate(-(camera.width * camera.anchorX), -(camera.height * camera.anchorY));
-        //camera position
-        self.context.translate(-camera.x, -camera.y);
+        self.context.translate((pCamera.width * pCamera.anchorX), (pCamera.height * pCamera.anchorY));
+        self.context.rotate(self.toRadians(-pCamera.angle));
+        self.context.translate(-(pCamera.width * pCamera.anchorX), -(pCamera.height * pCamera.anchorY));
+        //pCamera position
+        self.context.translate(-pCamera.x, -pCamera.y);
         // camera zoom.
-        self.context.scale(camera.zoom, camera.zoom); 
+        self.context.scale(pCamera.zoom, pCamera.zoom); 
 
 
-        if (entities.length > 0) {
-            entities.forEach(function (e) {
+        if (pEntities.length > 0) {
+            pEntities.forEach(function (e) {
                 if (e.visible) {
                     self.context.save();
                     self.context.translate(e.x + (e.width * e.anchorX), e.y + (e.height * e.anchorY));
