@@ -1,14 +1,15 @@
-var b2Vec2         = Box2D.Common.Math.b2Vec2;
-var b2BodyDef      = Box2D.Dynamics.b2BodyDef;
-var b2Body         = Box2D.Dynamics.b2Body;
-var b2FixtureDef   = Box2D.Dynamics.b2FixtureDef;
-var b2Fixture      = Box2D.Dynamics.b2Fixture;
-var b2World        = Box2D.Dynamics.b2World;
-var b2MassData     = Box2D.Collision.Shapes.b2MassData;
-var b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape;
-var b2CircleShape  = Box2D.Collision.Shapes.b2CircleShape;
-var b2DebugDraw    = Box2D.Dynamics.b2DebugDraw;
-var b2Contacts     = Box2D.Dynamics.Contacts;
+var b2Vec2            = Box2D.Common.Math.b2Vec2;
+var b2BodyDef         = Box2D.Dynamics.b2BodyDef;
+var b2Body            = Box2D.Dynamics.b2Body;
+var b2FixtureDef      = Box2D.Dynamics.b2FixtureDef;
+var b2Fixture         = Box2D.Dynamics.b2Fixture;
+var b2World           = Box2D.Dynamics.b2World;
+var b2MassData        = Box2D.Collision.Shapes.b2MassData;
+var b2PolygonShape    = Box2D.Collision.Shapes.b2PolygonShape;
+var b2CircleShape     = Box2D.Collision.Shapes.b2CircleShape;
+var b2DebugDraw       = Box2D.Dynamics.b2DebugDraw;
+var b2Contacts        = Box2D.Dynamics.Contacts;
+var b2ContactListener = Box2D.Dynamics.b2ContactListener;
 
 var Physics = function() {
     "use strict";
@@ -59,7 +60,7 @@ var Physics = function() {
 
     self.addEdge = function (pX1, pY1, pX2, pY2, pType) {
         var body = self.addBody(pX1, pY1, pType);
-        var fixture = self.edge(0, 0, pX2-pX1, pY2-pY1);
+        var fixture = self.edge(0, 0, pX2 - pX1, pY2 - pY1);
         body.CreateFixture(fixture);
         return body;
     };
@@ -141,6 +142,12 @@ var Physics = function() {
         pY2 /= self.scale;
         fixDef.shape.SetAsEdge({x: pX1, y: pY1}, {x: pX2, y: pY2});
         return fixDef;
+    };
+
+    self.contactListener = function() {
+        var listener = new b2ContactListener();
+        self.world.SetContactListener(listener);
+        return listener;
     };
 
     self.update = function() {

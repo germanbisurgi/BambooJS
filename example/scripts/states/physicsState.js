@@ -55,29 +55,34 @@ physicsState.create = function () {
     this.polyFixture4 = this.physics.addRectangle(this.polyBody, 1, 1, -25, -25);
     this.polyBody.m_angularVelocity = 1;
 
+
+    /*this.polyFixture1.SetUserData({name: 'banana'});
+    this.physics.contactListener().BeginContact = function(contact) {
+        var a = contact.GetFixtureA().GetUserData();
+        var b = contact.GetFixtureB().GetUserData();
+
+        if (a && a.name === 'banana') {
+            console.log('hit');
+        }
+    };*/
+
 };
 
 
 
 physicsState.update = function () {
 
-
-
     this.physics.followBody(this.mine5, this.circleBody);
     this.physics.followFixture(this.disc1, this.circleFixture1);
     this.physics.followFixture(this.disc2, this.circleFixture2);
     this.physics.followFixture(this.disc3, this.circleFixture3);
     this.physics.followFixture(this.disc4, this.circleFixture4);
-    
-
 
     this.physics.followBody(this.rectMine, this.rectBody);
     this.physics.followFixture(this.rectStone1, this.rectFixture1);
     this.physics.followFixture(this.rectStone2, this.rectFixture2);
     this.physics.followFixture(this.rectStone3, this.rectFixture3);
     this.physics.followFixture(this.rectStone4, this.rectFixture4);
-
-
 
     this.physics.followBody(this.polyMine, this.polyBody);
     this.physics.followFixture(this.polyStone1, this.polyFixture3);
@@ -89,30 +94,12 @@ physicsState.update = function () {
 
 
 
-
-
-
-
-
-
-
-
 physicsState.afterCreate = function () {
     var loadScreen = document.querySelector('.loading');
     loadScreen.classList.remove('show');
 };
 
 physicsState.postRender = function () {
-
-    this.renderer.context.beginPath();
-    this.renderer.context.moveTo(10, 160);
-    this.renderer.context.lineTo(190, 191);
-    this.renderer.context.lineTo(390, 160);
-    this.renderer.context.stroke();
-
     this.renderer.context.fillText('currentState:    ' + this.name, 200, 15);
     this.renderer.context.fillText('state time:      ' +  Math.floor(this.time.current / 1000), 200, 30);
-
-
-
 };
